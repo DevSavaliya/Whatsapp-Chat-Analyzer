@@ -3,23 +3,10 @@ import preprocessor
 import helper
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-import seaborn as sns
-
-
-# =========================
-# SIDEBAR
-# =========================
 
 st.sidebar.title("Whatsapp Chat Analyzer")
 
-uploaded_file = st.sidebar.file_uploader(
-    "Choose a file"
-)
-
-
-# =========================
-# IF FILE IS UPLOADED
-# =========================
+uploaded_file = st.sidebar.file_uploader("Choose a file")
 
 if uploaded_file is not None:
 
@@ -33,7 +20,6 @@ if uploaded_file is not None:
     # Process WhatsApp data
     df = preprocessor.preprocess(data)
 
-
     # =========================
     # SHOW COMPLETE DATAFRAME
     # =========================
@@ -43,7 +29,6 @@ if uploaded_file is not None:
         height=500,
         use_container_width=True
     )
-
 
     # =========================
     # USER SELECTION
@@ -55,300 +40,243 @@ if uploaded_file is not None:
         user_list.remove('group_notification')
 
     user_list.sort()
-
-    user_list.insert(
-        0,
-        "Overall"
-    )
+    user_list.insert(0, "Overall")
 
     selected_user = st.sidebar.selectbox(
         "Show Analysis wrt",
         user_list
     )
 
-
     # =========================
     # SHOW ANALYSIS
     # =========================
 
-    if st.sidebar.button(
-        "Show Analysis"
-    ):
+    if st.sidebar.button("Show Analysis"):
 
         # =========================
         # BASIC STATISTICS
         # =========================
 
-        (
-            num_messages,
-            words,
-            num_media_messages,
-            num_links
-        ) = helper.fetch_stats(
+        num_messages, words, num_media_messages, num_links = helper.fetch_stats(
             selected_user,
             df
         )
 
-        st.title(
-            "Top Statistics"
-        )
+        st.title("Top Statistics")
 
+        # =========================
+        # STATISTICS CARD STYLE
+        # =========================
+
+        st.markdown("""
+        <style>
+
+        .stat-card {
+            background-color: #1f2937;
+            padding: 20px 10px;
+            border-radius: 12px;
+            text-align: center;
+            height: 150px;
+            border: 1px solid #374151;
+            margin-bottom: 20px;
+        }
+
+        .stat-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 38px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        </style>
+        """, unsafe_allow_html=True)
+
+        # =========================
+        # STATISTICS CARDS
+        # =========================
 
         col1, col2, col3, col4 = st.columns(4)
 
-
         with col1:
-
-            st.header(
-                "Total Messages"
+            st.markdown(
+                f"""
+                <div class="stat-card">
+                    <div class="stat-title">
+                        Total Messages
+                    </div>
+                    <div class="stat-value">
+                        {num_messages}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
-
-            st.title(
-                num_messages
-            )
-
 
         with col2:
-
-            st.header(
-                "Total Words"
+            st.markdown(
+                f"""
+                <div class="stat-card">
+                    <div class="stat-title">
+                        Total Words
+                    </div>
+                    <div class="stat-value">
+                        {words}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
-
-            st.title(
-                words
-            )
-
 
         with col3:
-
-            st.header(
-                "Media Shared"
+            st.markdown(
+                f"""
+                <div class="stat-card">
+                    <div class="stat-title">
+                        Media Shared
+                    </div>
+                    <div class="stat-value">
+                        {num_media_messages}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
-
-            st.title(
-                num_media_messages
-            )
-
 
         with col4:
-
-            st.header(
-                "Links Shared"
+            st.markdown(
+                f"""
+                <div class="stat-card">
+                    <div class="stat-title">
+                        Links Shared
+                    </div>
+                    <div class="stat-value">
+                        {num_links}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
-
-            st.title(
-                num_links
-            )
-
 
         # =========================
         # MONTHLY TIMELINE
         # =========================
 
-        st.title(
-            "Monthly Timeline"
-        )
+        st.title("Monthly Timeline")
 
         timeline = helper.monthly_timeline(
             selected_user,
             df
         )
 
-        if not timeline.empty:
+        fig, ax = plt.subplots(figsize=(10, 5))
 
-            fig, ax = plt.subplots(
-                figsize=(12, 5)
-            )
+        ax.plot(
+            timeline['time'],
+            timeline['message'],
+            color='green'
+        )
 
-            ax.plot(
-                timeline['time'],
-                timeline['message'],
-                color='green',
-                marker='o'
-            )
+        plt.xticks(rotation="vertical")
 
-            ax.set_xlabel(
-                "Month"
-            )
+        ax.set_xlabel("Month")
+        ax.set_ylabel("Number of Messages")
 
-            ax.set_ylabel(
-                "Number of Messages"
-            )
-
-            plt.xticks(
-                rotation="vertical"
-            )
-
-            plt.tight_layout()
-
-            st.pyplot(
-                fig
-            )
-
-        else:
-
-            st.info(
-                "No monthly timeline data available."
-            )
-
+        st.pyplot(fig)
 
         # =========================
         # DAILY TIMELINE
         # =========================
 
-        st.title(
-            "Daily Timeline"
-        )
+        st.title("Daily Timeline")
 
         daily_timeline = helper.daily_timeline(
             selected_user,
             df
         )
 
-        if not daily_timeline.empty:
+        fig, ax = plt.subplots(figsize=(12, 5))
 
-            fig, ax = plt.subplots(
-                figsize=(12, 5)
-            )
+        ax.plot(
+            daily_timeline['only_date'],
+            daily_timeline['message'],
+            color='black'
+        )
 
-            ax.plot(
-                daily_timeline['only_date'],
-                daily_timeline['message'],
-                color='black'
-            )
+        plt.xticks(rotation="vertical")
 
-            ax.set_xlabel(
-                "Date"
-            )
+        ax.set_xlabel("Date")
+        ax.set_ylabel("Number of Messages")
 
-            ax.set_ylabel(
-                "Number of Messages"
-            )
-
-            plt.xticks(
-                rotation="vertical"
-            )
-
-            plt.tight_layout()
-
-            st.pyplot(
-                fig
-            )
-
-        else:
-
-            st.info(
-                "No daily timeline data available."
-            )
-
+        st.pyplot(fig)
 
         # =========================
         # ACTIVITY MAP
         # =========================
 
-        st.title(
-            "Activity Map"
-        )
+        st.title("Activity Map")
 
         col1, col2 = st.columns(2)
 
-
-        # =========================
+        # -------------------------
         # MOST BUSY DAY
-        # =========================
+        # -------------------------
 
         with col1:
 
-            st.subheader(
-                "Most Busy Day"
-            )
+            st.subheader("Most Busy Day")
 
             busy_day = helper.week_activity_map(
                 selected_user,
                 df
             )
 
-            if not busy_day.empty:
+            fig, ax = plt.subplots(figsize=(10, 6))
 
-                fig, ax = plt.subplots(
-                    figsize=(8, 5)
-                )
+            ax.bar(
+                busy_day.index,
+                busy_day.values
+            )
 
-                ax.bar(
-                    busy_day.index.tolist(),
-                    busy_day.values.tolist()
-                )
+            ax.set_xlabel("Day")
+            ax.set_ylabel("Number of Messages")
 
-                ax.set_xlabel(
-                    "Day"
-                )
+            plt.xticks(rotation="vertical")
 
-                ax.set_ylabel(
-                    "Number of Messages"
-                )
+            st.pyplot(fig)
 
-                plt.xticks(
-                    rotation="vertical"
-                )
-
-                plt.tight_layout()
-
-                st.pyplot(
-                    fig
-                )
-
-
-        # =========================
+        # -------------------------
         # MOST BUSY MONTH
-        # =========================
+        # -------------------------
 
         with col2:
 
-            st.subheader(
-                "Most Busy Month"
-            )
+            st.subheader("Most Busy Month")
 
             busy_month = helper.month_activity_map(
                 selected_user,
                 df
             )
 
-            if not busy_month.empty:
+            fig, ax = plt.subplots(figsize=(10, 6))
 
-                fig, ax = plt.subplots(
-                    figsize=(8, 5)
-                )
+            ax.bar(
+                busy_month.index,
+                busy_month.values,
+                color='orange'
+            )
 
-                ax.bar(
-                    busy_month.index.tolist(),
-                    busy_month.values.tolist(),
-                    color='orange'
-                )
+            ax.set_xlabel("Month")
+            ax.set_ylabel("Number of Messages")
 
-                ax.set_xlabel(
-                    "Month"
-                )
+            plt.xticks(rotation="vertical")
 
-                ax.set_ylabel(
-                    "Number of Messages"
-                )
-
-                plt.xticks(
-                    rotation="vertical"
-                )
-
-                plt.tight_layout()
-
-                st.pyplot(
-                    fig
-                )
-
-        st.title("Weekly Activity Map")
-        user_heatmap = helper.activity_heatmap(selected_user,df)
-        fig,ax = plt.subplots()
-        ax = sns.heatmap(user_heatmap)
-        st.pyplot(fig)
-
+            st.pyplot(fig)
 
         # =========================
         # MOST BUSY USERS
@@ -356,50 +284,30 @@ if uploaded_file is not None:
 
         if selected_user == "Overall":
 
-            st.title(
-                "Most Busy Users"
-            )
+            st.title("Most Busy Users")
 
-            x, _ = helper.most_busy_users(
-                df
-            )
+            x, _ = helper.most_busy_users(df)
 
-            fig, ax = plt.subplots(
-                figsize=(10, 5)
-            )
+            fig, ax = plt.subplots(figsize=(10, 5))
 
             ax.bar(
-                x.index.tolist(),
-                x.values.tolist(),
+                x.index,
+                x.values,
                 color="red"
             )
 
-            plt.xticks(
-                rotation="vertical"
-            )
+            plt.xticks(rotation="vertical")
 
-            ax.set_xlabel(
-                "Users"
-            )
+            ax.set_xlabel("Users")
+            ax.set_ylabel("Number of Messages")
 
-            ax.set_ylabel(
-                "Number of Messages"
-            )
-
-            plt.tight_layout()
-
-            st.pyplot(
-                fig
-            )
-
+            st.pyplot(fig)
 
         # =========================
         # WORDCLOUD
         # =========================
 
-        st.title(
-            "WordCloud"
-        )
+        st.title("WordCloud")
 
         df_wc = helper.create_wordcloud(
             selected_user,
@@ -414,95 +322,60 @@ if uploaded_file is not None:
             df_wc.to_array()
         )
 
-        ax.axis(
-            "off"
-        )
+        ax.axis("off")
 
-        plt.tight_layout()
-
-        st.pyplot(
-            fig
-        )
-
+        st.pyplot(fig)
 
         # =========================
         # MOST COMMON WORDS
         # =========================
 
-        st.title(
-            "Most Common Words"
-        )
+        st.title("Most Common Words")
 
         most_common_df = helper.most_common_words(
             selected_user,
             df
         )
 
-        if not most_common_df.empty:
+        fig, ax = plt.subplots(
+            figsize=(10, 5)
+        )
 
-            fig, ax = plt.subplots(
-                figsize=(12, 6)
-            )
+        ax.bar(
+            most_common_df['word'],
+            most_common_df['frequency']
+        )
 
-            ax.bar(
-                most_common_df['word'].tolist(),
-                most_common_df['frequency'].tolist(),
-                color='orange'
-            )
+        plt.xticks(
+            rotation="vertical"
+        )
 
-            plt.xticks(
-                rotation="vertical"
-            )
+        ax.set_xlabel("Words")
+        ax.set_ylabel("Frequency")
 
-            ax.set_xlabel(
-                "Words"
-            )
-
-            ax.set_ylabel(
-                "Frequency"
-            )
-
-            plt.tight_layout()
-
-            st.pyplot(
-                fig
-            )
-
-        else:
-
-            st.info(
-                "No meaningful words found."
-            )
-
+        st.pyplot(fig)
 
         # =========================
         # EMOJI ANALYSIS
         # =========================
 
-        st.title(
-            "Emoji Analysis"
-        )
+        st.title("Emoji Analysis")
 
         emoji_df = helper.emoji_helper(
             selected_user,
             df
         )
 
-        emoji_df = emoji_df.head(
-            10
-        ).copy()
-
+        # Top 10 emojis
+        emoji_df = emoji_df.head(10).copy()
 
         if not emoji_df.empty:
 
-            col1, col2 = st.columns(
-                [2, 1]
-            )
+            col1, col2 = st.columns([2, 1])
 
-
-            # =========================
+            # -------------------------
             # PIE CHART
-            # =========================
+            # -------------------------
 
             with col1:
 
@@ -526,39 +399,29 @@ if uploaded_file is not None:
                     }
                 )
 
-
+                # Use Windows emoji font
                 for text in texts:
 
                     text.set_fontproperties(
                         emoji_font
                     )
 
-                    text.set_fontsize(
-                        18
-                    )
+                    text.set_fontsize(18)
 
-
+                # Percentage font
                 for autotext in autotexts:
 
                     autotext.set_fontsize(
                         12
                     )
 
+                ax.axis('equal')
 
-                ax.axis(
-                    'equal'
-                )
+                st.pyplot(fig)
 
-                plt.tight_layout()
-
-                st.pyplot(
-                    fig
-                )
-
-
-            # =========================
-            # EMOJI TABLE
-            # =========================
+            # -------------------------
+            # EMOJI FREQUENCY TABLE
+            # -------------------------
 
             with col2:
 
@@ -578,7 +441,6 @@ if uploaded_file is not None:
                     height=400,
                     use_container_width=True
                 )
-
 
         else:
 
