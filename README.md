@@ -7,15 +7,13 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 An interactive WhatsApp chat analytics dashboard built with **Python and Streamlit** that transforms exported WhatsApp conversations into meaningful communication insights through statistics, timelines, activity analysis, word frequency, WordClouds, and emoji analytics.
-
 ## 🚀 Live Demo
 
 **Live Application:**  
-[Open the WhatsApp Chat Analyzer](YOUR_LIVE_DEMO_URL)
+[Open the WhatsApp Chat Analyzer](https://whatsapp-chat-analyzer-dev.streamlit.app/)
 
 **GitHub Repository:**  
-[View the source code on GitHub](YOUR_GITHUB_REPOSITORY_URL)
-
+[View the source code on GitHub](https://github.com/DevSavaliya/Whatsapp-Chat-Analyzer)
 ---
 
 ## 📌 Project Overview
