@@ -4,11 +4,11 @@ An interactive WhatsApp chat analytics dashboard built with **Python and Streaml
 
 ## 🚀 Live Demo
 
-👉 **Live Application:**  
-https://whatsapp-chat-analyzer-dev.streamlit.app/
+**Live Application:**  
+[Open the WhatsApp Chat Analyzer](YOUR_LIVE_DEMO_URL)
 
-👉 **GitHub Repository:**  
-https://github.com/DevSavaliya/Whatsapp-Chat-Analyzer
+**GitHub Repository:**  
+[View the source code on GitHub](YOUR_GITHUB_REPOSITORY_URL)
 
 ---
 
@@ -20,9 +20,9 @@ However, raw WhatsApp chat exports are difficult to analyze manually.
 
 The **WhatsApp Chat Analyzer** solves this problem by converting an exported WhatsApp `.txt` chat file into an interactive analytics dashboard.
 
-Users can upload their WhatsApp chat export, select either the complete conversation or an individual participant, and explore different aspects of the conversation through visualizations and statistics.
+Users can upload their WhatsApp chat export, select either the complete conversation or an individual participant, and explore different aspects of the conversation through statistics and visualizations.
 
-The application is designed to make conversational data analysis simple, interactive, and accessible without requiring users to write code.
+The application makes conversational data analysis simple, interactive, and accessible without requiring users to write code.
 
 ---
 
@@ -31,14 +31,15 @@ The application is designed to make conversational data analysis simple, interac
 The main objectives of this project are to:
 
 - Convert unstructured WhatsApp chat exports into structured data.
-- Provide an easy-to-use analytics dashboard.
+- Build an interactive and user-friendly analytics dashboard.
 - Analyze communication patterns over time.
-- Compare participant activity.
-- Identify frequently used words and emojis.
-- Visualize message activity through charts.
-- Provide user-specific analysis.
-- Demonstrate practical application of Python data analysis and visualization.
+- Identify participant engagement and activity.
+- Analyze commonly used words and emojis.
+- Visualize communication trends using charts.
+- Provide both overall and participant-level analysis.
+- Demonstrate practical Python data analysis and visualization.
 - Deploy the application as an accessible web application using Streamlit Community Cloud.
+- Apply software development, data processing, visualization, and deployment concepts in a real-world project.
 
 ---
 
@@ -46,12 +47,12 @@ The main objectives of this project are to:
 
 ### 📊 Overall Statistics
 
-The dashboard provides key conversation statistics such as:
+The dashboard provides key conversation statistics including:
 
-- Total number of messages
-- Total number of words
-- Total media files shared
-- Total links shared
+- Total Messages
+- Total Words
+- Media Shared
+- Links Shared
 
 These metrics provide a quick overview of the selected conversation.
 
@@ -59,57 +60,65 @@ These metrics provide a quick overview of the selected conversation.
 
 ### 👤 User-Specific Analysis
 
-Users can select:
+Users can choose between:
 
 - **Overall** — analyze the complete conversation.
 - **Individual participant** — analyze messages from a specific participant.
 
-This allows users to explore individual communication behavior within a group or personal conversation.
+This makes it possible to explore individual communication behavior within group or personal conversations.
 
 ---
 
 ### 📈 Monthly Timeline
 
-Visualizes the number of messages exchanged during each month.
+The monthly timeline visualizes message activity across different months.
 
-This helps identify:
+It helps identify:
 
 - Highly active months
 - Low-activity periods
 - Long-term communication trends
+- Changes in communication volume
 
 ---
 
 ### 📅 Daily Timeline
 
-Displays message activity by date.
+The daily timeline displays the number of messages exchanged on each date.
 
-This makes it easier to identify:
+It can be used to identify:
 
 - Highly active days
 - Communication patterns
-- Changes in activity over time
+- Periods of increased activity
+- Changes in engagement over time
 
 ---
 
 ### 🗓️ Activity Map
 
-The application analyzes activity by:
+The application analyzes activity according to:
 
 - Day of the week
 - Month
 
-This helps identify when conversations are most active.
-
-For example, users can determine whether a conversation is more active during weekdays or weekends.
+This helps identify when the conversation is most active.
 
 ---
 
 ### 👥 Most Busy Users
 
-For group conversations, the application identifies participants who sent the highest number of messages.
+For group conversations, the application identifies participants with the highest number of messages.
 
-This provides an overview of participant engagement within the conversation.
+This provides an overview of participant engagement and communication activity.
+
+---
+
+### 🔤 Most Common Words
+
+The application calculates frequently used words while filtering common stopwords.
+
+This provides a clearer representation of important and frequently occurring conversational terms.
 
 ---
 
@@ -117,15 +126,7 @@ This provides an overview of participant engagement within the conversation.
 
 The application generates a visual WordCloud based on frequently used words.
 
-The WordCloud provides a quick visual representation of the main topics and vocabulary appearing in the conversation.
-
----
-
-### 🔤 Most Common Words
-
-The application calculates the most frequently used words while filtering common stopwords.
-
-This provides a more meaningful representation of frequently occurring conversational terms.
+The WordCloud provides a quick visual representation of the vocabulary and recurring themes within the conversation.
 
 ---
 
@@ -136,26 +137,93 @@ The application analyzes emoji usage and displays:
 - Most frequently used emojis
 - Emoji frequency
 - Top 10 emojis
+- Emoji distribution
 
-This provides an additional perspective on communication style and emotional expression.
+This provides an additional perspective on communication style and expression.
 
 ---
 
 ### 🔗 Link Analysis
 
-The application identifies links shared within the conversation and provides the total number of links detected.
+The application detects links shared within the conversation and calculates the total number of links.
 
 ---
 
 ### 📱 Media Analysis
 
-The application detects WhatsApp messages containing media placeholders and calculates the amount of media shared.
+The application detects messages containing WhatsApp media placeholders and calculates the amount of media shared.
+
+---
+
+## 🖥️ Application Screenshots
+
+### 📊 Dashboard Overview
+
+The main dashboard provides an overview of the selected WhatsApp conversation, including key statistics such as messages, words, media, and links.
+
+![Dashboard Overview](screenshots/Dashboard.png)
+
+---
+
+### 📈 Monthly Timeline
+
+Visualizes message activity across different months and helps identify long-term communication trends.
+
+![Monthly Timeline](screenshots/Monthly_timeline.png)
+
+---
+
+### 📅 Daily Timeline
+
+Shows the number of messages exchanged on each day.
+
+![Daily Timeline](screenshots/Daily-Timeline.png)
+
+---
+
+### 🗓️ Activity Map
+
+Analyzes communication activity based on days of the week and months.
+
+![Activity Map](screenshots/Activity-Map.png)
+
+---
+
+### 👥 Most Busy Users
+
+Displays participants with the highest message activity in group conversations.
+
+![Most Busy Users](screenshots/Most-Busy-Users.png)
+
+---
+
+### 🔤 Most Common Words
+
+Shows the most frequently used words in the selected conversation after filtering common stopwords.
+
+![Most Common Words](screenshots/Most-Common-Words.png)
+
+---
+
+### ☁️ WordCloud
+
+Provides a visual representation of frequently occurring words in the conversation.
+
+![WordCloud](screenshots/Wordcloud.png)
+
+---
+
+### 😀 Emoji Analysis
+
+Analyzes emoji usage and displays the most frequently used emojis.
+
+![Emoji Analysis](screenshots/Emoji-Analysis.png)
 
 ---
 
 ## 🔄 Application Workflow
 
-The application follows the following general workflow:
+The application follows the following workflow:
 
 ```text
 WhatsApp Chat Export
