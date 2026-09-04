@@ -161,7 +161,7 @@ The application detects messages containing WhatsApp media placeholders and calc
 
 The main dashboard provides an overview of the selected WhatsApp conversation, including key statistics such as messages, words, media, and links.
 
-![Dashboard Overview](screenshots/Dashboard.png)
+![Dashboard Overview](Screenshots/Dashboard.png)
 
 ---
 
@@ -169,7 +169,7 @@ The main dashboard provides an overview of the selected WhatsApp conversation, i
 
 Visualizes message activity across different months and helps identify long-term communication trends.
 
-![Monthly Timeline](screenshots/Monthly_timeline.png)
+![Monthly Timeline](Screenshots/Monthly-Timeline.png)
 
 ---
 
@@ -177,7 +177,7 @@ Visualizes message activity across different months and helps identify long-term
 
 Shows the number of messages exchanged on each day.
 
-![Daily Timeline](screenshots/Daily-Timeline.png)
+![Daily Timeline](Screenshots/Daily-Timeline.png)
 
 ---
 
@@ -185,7 +185,7 @@ Shows the number of messages exchanged on each day.
 
 Analyzes communication activity based on days of the week and months.
 
-![Activity Map](screenshots/Activity-Map.png)
+![Activity Map](Screenshots/Activity-Map.png)
 
 ---
 
@@ -193,7 +193,7 @@ Analyzes communication activity based on days of the week and months.
 
 Displays participants with the highest message activity in group conversations.
 
-![Most Busy Users](screenshots/Most-Busy-Users.png)
+![Most Busy Users](Screenshots/Most-Busy-Users.png)
 
 ---
 
@@ -201,7 +201,7 @@ Displays participants with the highest message activity in group conversations.
 
 Shows the most frequently used words in the selected conversation after filtering common stopwords.
 
-![Most Common Words](screenshots/Most-Common-Words.png)
+![Most Common Words](Screenshots/Most-Common-Words.png)
 
 ---
 
@@ -209,7 +209,7 @@ Shows the most frequently used words in the selected conversation after filterin
 
 Provides a visual representation of frequently occurring words in the conversation.
 
-![WordCloud](screenshots/Wordcloud.png)
+![WordCloud](Screenshots/Wordcloud.png)
 
 ---
 
@@ -217,7 +217,7 @@ Provides a visual representation of frequently occurring words in the conversati
 
 Analyzes emoji usage and displays the most frequently used emojis.
 
-![Emoji Analysis](screenshots/Emoji-Analysis.png)
+![Emoji Analysis](Screenshots/Emoji-Analysis.png)
 
 ---
 
